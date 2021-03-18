@@ -998,7 +998,7 @@ function! Tex_GetCurrentEnv()
 			if ix == 0
 				let env_line = search('\w')
 				let ia = getcurpos()[2]
-				call search('\(%\|\_s\)')
+				call search('}')
 				let ib = getcurpos()[2]
 				call search('\\begin{', 'b')
 				call Tex_SetPos(pos)
