@@ -47,48 +47,128 @@ if !exists('s:doneMappings')
 	" general keys {{{
 	inoremap <S-F9>		<C-r>="\\newcommand{<++>}{<++>}<++>"<CR><ESC>17h:call IMAP_Jumpfunc('', 0)<CR>
 	" }}}
-	" main formatting and elements. {{{
-	" taken from auctex.vim or miktexmacros.vim
-	call IMAP ('__', '_{<++>}<++>', "tex")
+	" regular brackets {{{
 	call IMAP ('()', '(<++>)<++>', "tex")
 	call IMAP ('[]', '[<++>]<++>', "tex")
-	call IMAP ('{}', '{<++>}<++>', "tex")
-	call IMAP ('{{', '{<++>}<++>', "tex")
 	call IMAP ('÷°', '\{<++>\}<++>', "tex")
 	call IMAP ('||', '|<++>|<++>', "tex")
 	call IMAP ('¦¦', '\|<++>\|<++>', "tex")
 	call IMAP ('«', '\langle <++>', "tex")
 	call IMAP ('»', '\rangle<++>', "tex")
 	call IMAP ('\langle »', '\langle <++> \rangle<++>', "tex")
-	call IMAP ('^^', '^{<++>}<++>', "tex")
+	" }}}
+	" different size brackets {{{
+	call IMAP (g:Tex_Leader2.'(', '\bigl( <++> \bigr)<++>', "tex")
+	call IMAP (g:Tex_Leader2.'[', '\bigl[ <++> \bigr]<++>', "tex")
+	call IMAP (g:Tex_Leader2.'{', '\bigl\{ <++> \bigr\}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'|', '\bigl| <++> \bigr|<++>', "tex")
+	call IMAP (g:Tex_Leader2.'¦', '\bigl\| <++> \bigr\|<++>', "tex")
+	call IMAP (g:Tex_Leader2.'«', '\bigl\langle <++> \bigr\rangle<++>', "tex")
+	call IMAP (g:Tex_Leader3.'(', '\Bigl( <++> \Bigr)<++>', "tex")
+	call IMAP (g:Tex_Leader3.'[', '\Bigl[ <++> \Bigr]<++>', "tex")
+	call IMAP (g:Tex_Leader3.'{', '\Bigl\{ <++> \Bigr\}<++>', "tex")
+	call IMAP (g:Tex_Leader3.'|', '\Bigl| <++> \Bigr|<++>', "tex")
+	call IMAP (g:Tex_Leader3.'¦', '\Bigl\| <++> \Bigr\|<++>', "tex")
+	call IMAP (g:Tex_Leader3.'«', '\Bigl\langle <++> \Bigr\rangle<++>', "tex")
+	call IMAP (g:Tex_Leader4.'(', '\biggl( <++> \biggr)<++>', "tex")
+	call IMAP (g:Tex_Leader4.'[', '\biggl[ <++> \biggr]<++>', "tex")
+	call IMAP (g:Tex_Leader4.'{', '\biggl\{ <++> \biggr\}<++>', "tex")
+	call IMAP (g:Tex_Leader4.'|', '\biggl| <++> \biggr|<++>', "tex")
+	call IMAP (g:Tex_Leader4.'¦', '\biggl\| <++> \biggr\|<++>', "tex")
+	call IMAP (g:Tex_Leader4.'«', '\biggl\langle <++> \biggr\rangle<++>', "tex")
+	call IMAP (g:Tex_Leader5.'(', '\Biggl( <++> \Biggr)<++>', "tex")
+	call IMAP (g:Tex_Leader5.'[', '\Biggl[ <++> \Biggr]<++>', "tex")
+	call IMAP (g:Tex_Leader5.'{', '\Biggl\{ <++> \Biggr\}<++>', "tex")
+	call IMAP (g:Tex_Leader5.'|', '\Biggl| <++> \Biggr|<++>', "tex")
+	call IMAP (g:Tex_Leader5.'¦', '\Biggl\| <++> \Biggr\|<++>', "tex")
+	call IMAP (g:Tex_Leader5.'«', '\Biggl\langle <++> \Biggr\rangle<++>', "tex")
+	" }}}
+	" other sized stuff {{{
+	call IMAP (g:Tex_Leader.'|', '\big|', "tex")
+	" }}}
+	" enclosings {{{
 	call IMAP ('$$', '$<++>$<++>', "tex")
+	call IMAP ('__', '_{<++>}<++>', "tex")
+	call IMAP ('^^', '^{<++>}<++>', "tex")
+	call IMAP ('{}', '{<++>}<++>', "tex")
+	call IMAP ('{{', '{<++>}<++>', "tex")
+	" }}}
+	" aligned environments {{{
 	call IMAP ('==', '&= ', "tex")
 	call IMAP ('~~', '&\approx ', "tex")
+	" }}}
+	" binary relations or operations {{{
 	call IMAP ('=~', '\approx', "tex")
 	call IMAP ('~=', '\approx', "tex")
+	call IMAP (g:Tex_Leader.'<', '\le', "tex")
+	call IMAP (g:Tex_Leader.'>', '\ge', "tex")
+	call IMAP (g:Tex_Leader.'*', '\times', "tex")
+	call IMAP (g:Tex_Leader.'%', '\div', "tex")
+	call IMAP (g:Tex_Leader.'&', '\wedge', "tex")
+	call IMAP (g:Tex_Leader.'(', '\subset', "tex")
+	call IMAP (g:Tex_Leader.')', '\supset', "tex")
+	call IMAP (g:Tex_Leader.'=', '\equiv', "tex")
+	call IMAP (g:Tex_Leader2.'=', '\cong', "tex")
+	call IMAP (g:Tex_Leader2.'*', '\otimes', "tex")
+	call IMAP (g:Tex_Leader2.'/', '\oslash', "tex")
+	call IMAP (g:Tex_Leader2.'+', '\oplus', "tex")
+	call IMAP (g:Tex_Leader2.'-', '\ominus', "tex")
+	call IMAP (g:Tex_Leader2.'a', '\cap', "tex")
+	call IMAP (g:Tex_Leader2.'u', '\cup', "tex")
+	call IMAP (g:Tex_Leader2.'div', '\divides', "tex")
+	call IMAP (g:Tex_Leader2.'def', '\defeq', "tex")
+	call IMAP (g:Tex_Leader2.'fed', '\qefed', "tex")
+	" }}}
+	" mathematical generic tweaking {{{
+	call IMAP (g:Tex_Leader2.'os', '\overset{<+over+>}{<+center+>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'us', '\underset{<+under+>}{<+center+>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'ss', '\substack{<++>}<++>', "tex")
+	" }}}
+	" mathematical font/symbol tweaking {{{
+	call IMAP (g:Tex_Leader2.'on', '\operatorname{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'mr', '\mathrel{<++>}<++>', "tex")
 
+	call IMAP (g:Tex_Leader2.'rm', '\mathrm{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'it', '\mathit{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'sf', '\mathsf{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'ds', '\mathds{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'fr', '\mathfrak{<++>}<++>', "tex")
+	" }}}
+	" dots {{{
+	call IMAP (g:Tex_Leader2.'..', '\ldots', "tex")
+	call IMAP (g:Tex_Leader2.'::', '\cdots', "tex")
+	call IMAP (g:Tex_Leader2.';;', '\vdots', "tex")
+	call IMAP (g:Tex_Leader2.':.', '\ddots', "tex")
+	" }}}
+	" diacritics {{{
 	call IMAP (g:Tex_Leader.'^', '\hat{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'_', '\bar{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'~', '\tilde{<++>}<++>', "tex")
-
+	call IMAP (g:Tex_Leader.';', '\dot{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader.':', '\ddot{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'^', '\widehat{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'_', '\overline{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
+	" }}}
+	" functions/operations with inputs {{{
 	call IMAP (g:Tex_Leader.'2', '\sqrt{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader.'/', '\frac{<++>}{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'bin', '\binom{<++>}{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'lim', '\lim_{<++>}<++>', "tex")
+	" }}}
+	" symbols {{{
 	call IMAP (g:Tex_Leader.'6', '\partial', "tex")
 	call IMAP (g:Tex_Leader.'8', '\infty', "tex")
 	call IMAP (g:Tex_Leader.'0', '\emptyset', "tex")
-
-	call IMAP (g:Tex_Leader.'%', '\div', "tex")
-	call IMAP (g:Tex_Leader.'&', '\wedge', "tex")
-	call IMAP (g:Tex_Leader.'/', '\frac{<++>}{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader.'(', '\subset', "tex")
-	call IMAP (g:Tex_Leader.')', '\supset', "tex")
-
 	call IMAP (g:Tex_Leader.'o', '\circ', "tex")
-	call IMAP (g:Tex_Leader.'=', '\equiv', "tex")
 	if !g:Tex_SmartKeyDot
 		call IMAP (g:Tex_Leader.'.', '\cdot', "tex")
 	end
-	call IMAP (g:Tex_Leader.'*', '\times', "tex")
-
+	call IMAP (g:Tex_Leader2.'lra', '\longrightarrow', "tex")
+	call IMAP (g:Tex_Leader2.'fa', '\forall', "tex")
+	call IMAP (g:Tex_Leader2.'ex', '\exists', "tex")
+	" }}}
+	" big expressions {{{
 	call IMAP (g:Tex_Leader.'M', '\sum_{<++>}<++>', 'tex')
 	call IMAP (g:Tex_Leader.'N', '\prod_{<++>}<++>', 'tex')
 	call IMAP (g:Tex_Leader.'I', '\int_{<++>}<++>', "tex")
@@ -96,13 +176,15 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader.'B', '\bigotimes_{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'C', '\bigcap_{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'V', '\bigcup_{<++>}<++>', "tex")
-
-	call IMAP (g:Tex_Leader.'<', '\le', "tex")
-	call IMAP (g:Tex_Leader.'>', '\ge', "tex")
-
+	" }}}
+	" misc {{{
 	call IMAP (g:Tex_Leader.',', '\nonumber', "tex")
-	call IMAP (g:Tex_Leader.';', '\dot{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader.':', '\ddot{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'ig', '\includegraphics[<+dimensions+>]{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'SI', '\SI{<++>}{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'fn', '\footnote{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'or', '\orm{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'oi', '\oit{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'href', '\href{<+link+>}{<+text+>}<++>', "tex")
 	" }}}
 	" Greek Letters {{{
 	" The non-alphabetic letters can be achieved by pressing ALT-*key* for the
@@ -152,81 +234,6 @@ if !exists('s:doneMappings')
 	call IMAP(g:Tex_Leader.'W', '\Omega', 'tex')
 	call IMAP(g:Tex_Leader.'X', '\Xi', 'tex')
 	call IMAP(g:Tex_Leader.'Y', '\Psi', 'tex')
-	" }}}
-	" secondary mappings {{{
-	call IMAP ('((', '\left( <++> \right)<++>', "tex")
-	call IMAP ('[[', '\left[ <++> \right]<++>', "tex")
-	call IMAP ('÷÷', '\left\{ <++> \right\}<++>', "tex")
-	call IMAP (g:Tex_Leader.'|', '\big|', "tex")
-	call IMAP (g:Tex_Leader.'¦', '\left\| <++> \right\|<++>', "tex")
-	call IMAP ('\langle «', '\left\langle <++> \right\rangle<++>', "tex")
-
-	call IMAP (g:Tex_Leader2.'(', '\bigl( <++> \bigr)<++>', "tex")
-	call IMAP (g:Tex_Leader2.'[', '\bigl[ <++> \bigr]<++>', "tex")
-	call IMAP (g:Tex_Leader2.'{', '\bigl\{ <++> \bigr\}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'|', '\bigl| <++> \bigr|<++>', "tex")
-	call IMAP (g:Tex_Leader2.'¦', '\bigl\| <++> \bigr\|<++>', "tex")
-	call IMAP (g:Tex_Leader2.'«', '\bigl\langle <++> \bigr\rangle<++>', "tex")
-	call IMAP (g:Tex_Leader3.'(', '\Bigl( <++> \Bigr)<++>', "tex")
-	call IMAP (g:Tex_Leader3.'[', '\Bigl[ <++> \Bigr]<++>', "tex")
-	call IMAP (g:Tex_Leader3.'{', '\Bigl\{ <++> \Bigr\}<++>', "tex")
-	call IMAP (g:Tex_Leader3.'|', '\Bigl| <++> \Bigr|<++>', "tex")
-	call IMAP (g:Tex_Leader3.'¦', '\Bigl\| <++> \Bigr\|<++>', "tex")
-	call IMAP (g:Tex_Leader3.'«', '\Bigl\langle <++> \Bigr\rangle<++>', "tex")
-	call IMAP (g:Tex_Leader4.'(', '\biggl( <++> \biggr)<++>', "tex")
-	call IMAP (g:Tex_Leader4.'[', '\biggl[ <++> \biggr]<++>', "tex")
-	call IMAP (g:Tex_Leader4.'{', '\biggl\{ <++> \biggr\}<++>', "tex")
-	call IMAP (g:Tex_Leader4.'|', '\biggl| <++> \biggr|<++>', "tex")
-	call IMAP (g:Tex_Leader4.'¦', '\biggl\| <++> \biggr\|<++>', "tex")
-	call IMAP (g:Tex_Leader4.'«', '\biggl\langle <++> \biggr\rangle<++>', "tex")
-	call IMAP (g:Tex_Leader5.'(', '\Biggl( <++> \Biggr)<++>', "tex")
-	call IMAP (g:Tex_Leader5.'[', '\Biggl[ <++> \Biggr]<++>', "tex")
-	call IMAP (g:Tex_Leader5.'{', '\Biggl\{ <++> \Biggr\}<++>', "tex")
-	call IMAP (g:Tex_Leader5.'|', '\Biggl| <++> \Biggr|<++>', "tex")
-	call IMAP (g:Tex_Leader5.'¦', '\Biggl\| <++> \Biggr\|<++>', "tex")
-	call IMAP (g:Tex_Leader5.'«', '\Biggl\langle <++> \Biggr\rangle<++>', "tex")
-
-	call IMAP (g:Tex_Leader2.'..', '\ldots', "tex")
-	call IMAP (g:Tex_Leader2.'::', '\cdots', "tex")
-	call IMAP (g:Tex_Leader2.';;', '\vdots', "tex")
-	call IMAP (g:Tex_Leader2.':.', '\ddots', "tex")
-
-	call IMAP (g:Tex_Leader2.'*', '\otimes', "tex")
-	call IMAP (g:Tex_Leader2.'/', '\oslash', "tex")
-	call IMAP (g:Tex_Leader2.'+', '\oplus', "tex")
-	call IMAP (g:Tex_Leader2.'-', '\ominus', "tex")
-	call IMAP (g:Tex_Leader2.'=', '\cong', "tex")
-
-	call IMAP (g:Tex_Leader2.'fa', '\forall', "tex")
-	call IMAP (g:Tex_Leader2.'ex', '\exists', "tex")
-	call IMAP (g:Tex_Leader2.'def', '\defeq', "tex")
-	call IMAP (g:Tex_Leader2.'fed', '\qefed', "tex")
-	call IMAP (g:Tex_Leader2.'lra', '\longrightarrow', "tex")
-	call IMAP (g:Tex_Leader2.'div', '\divides', "tex")
-	call IMAP (g:Tex_Leader2.'ig', '\includegraphics[<+dimensions+>]{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'os', '\overset{<+over+>}{<+center+>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'us', '\underset{<+under+>}{<+center+>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'mr', '\mathrel{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'SI', '\SI{<++>}{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'num', '\num{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'lim', '\lim_{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'fn', '\footnote{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'ss', '\substack{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'on', '\operatorname{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'rm', '\mathrm{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'it', '\mathit{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'sf', '\mathsf{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'ds', '\mathds{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'fr', '\mathfrak{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'or', '\orm{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'oi', '\oit{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'bin', '\binom{<++>}{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'hl', '\hyperlink{<+label+>}{<+text+>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'ht', '\hypertarget{<+label+>}{<+text+>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'href', '\href{<+link+>}{<+text+>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'^', '\widehat{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'_', '\overline{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
 	" }}}
 	" Tikz {{{
 	call IMAP (g:Tex_Leader3.'draw', '\draw[<+options+>] (<+coordinate+>) <+do+>;<++>', "tex")
