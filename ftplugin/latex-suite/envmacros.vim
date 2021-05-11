@@ -55,7 +55,7 @@ let s:table =		"\\begin{table}\<cr>\\centering\<cr>\\caption{<+Caption text+>}\<
 
 let s:code =		"\\begin{code}[<+htpb+>]\<cr>\\centering\<cr>\\caption{<+caption text+>}\<cr>\\lstinputlisting[language=<++>,firstline=<++>,lastline=<++>,firstnumber=<++>]{<++>}\<cr>\\label{" . s:labelprefix_code . "<+label+>}\<cr>\\end{code}" . s:end_with_cr . "<++>"
 
-let s:tikzpicture =	"\\begin{tikzpicture}[<+options+>]\<cr><++>\<cr>\\end{tikzpicture}" . s:end_with_cr . "<++>"
+let s:tikzpicture =	"\\begin{tikzpicture}\<cr><++>\<cr>\\end{tikzpicture}" . s:end_with_cr . "<++>"
 
 let s:list =		"\\begin{list}{<+label+>}{<+spacing+>}\<cr>\\item".s:items_with_cr."<++>\<cr>\\end{list}" . s:end_with_cr . "<++>"
 let s:description =	"\\begin{description}\<cr>\\item[<+label+>]".s:items_with_cr."<++>\<cr>\\end{description}" . s:end_with_cr . "<++>"
@@ -76,16 +76,16 @@ let s:pmatrix =		"\\begin{pmatrix} <++> \\end{pmatrix}<++>"
 let s:bmatrix =		"\\begin{bmatrix} <++> \\end{bmatrix}<++>"
 let s:Bmatrix =		"\\begin{Bmatrix} <++> \\end{Bmatrix}<++>"
 
-let s:definition =	"\\begin{definition}[<+name+>]\\label{" . s:labelprefix_definition . "<+label+>}\<cr><++>\<cr>\\end{definition}" . s:end_with_cr . "<++>"
-let s:theorem =		"\\begin{theorem}[<+name+>]\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{theorem}" . s:end_with_cr . "<++>"
-let s:proposition =	"\\begin{proposition}[<+name+>]\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{proposition}" . s:end_with_cr . "<++>"
-let s:corollary =	"\\begin{corollary}[<+name+>]\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{corollary}" . s:end_with_cr . "<++>"
-let s:conjecture =	"\\begin{conjecture}[<+name+>]\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{conjecture}" . s:end_with_cr . "<++>"
-let s:lemma =		"\\begin{lemma}[<+name+>]\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{lemma}" . s:end_with_cr . "<++>"
-let s:example =		"\\begin{example}[<+name+>]\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{example}" . s:end_with_cr . "<++>"
-let s:exercise =	"\\begin{exercise}[<+name+>]\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{exercise}" . s:end_with_cr . "<++>"
-let s:method =		"\\begin{method}[<+name+>]\\label{" . s:labelprefix_method . "<+label+>}\<cr><++>\<cr>\\end{method}" . s:end_with_cr . "<++>"
-let s:axiom =		"\\begin{axiom}[<+name+>]\\label{" . s:labelprefix_axiom . "<+label+>}\<cr><++>\<cr>\\end{axiom}" . s:end_with_cr . "<++>"
+let s:definition =	"\\begin{definition}\\label{" . s:labelprefix_definition . "<+label+>}\<cr><++>\<cr>\\end{definition}" . s:end_with_cr . "<++>"
+let s:theorem =		"\\begin{theorem}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{theorem}" . s:end_with_cr . "<++>"
+let s:proposition =	"\\begin{proposition}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{proposition}" . s:end_with_cr . "<++>"
+let s:corollary =	"\\begin{corollary}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{corollary}" . s:end_with_cr . "<++>"
+let s:conjecture =	"\\begin{conjecture}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{conjecture}" . s:end_with_cr . "<++>"
+let s:lemma =		"\\begin{lemma}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{lemma}" . s:end_with_cr . "<++>"
+let s:example =		"\\begin{example}\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{example}" . s:end_with_cr . "<++>"
+let s:exercise =	"\\begin{exercise}\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{exercise}" . s:end_with_cr . "<++>"
+let s:method =		"\\begin{method}\\label{" . s:labelprefix_method . "<+label+>}\<cr><++>\<cr>\\end{method}" . s:end_with_cr . "<++>"
+let s:axiom =		"\\begin{axiom}\\label{" . s:labelprefix_axiom . "<+label+>}\<cr><++>\<cr>\\end{axiom}" . s:end_with_cr . "<++>"
 " }}}
 " define environments with special behavior in line wise selection. {{{
 if !exists('s:vis_center_left')
