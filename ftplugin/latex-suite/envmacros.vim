@@ -50,8 +50,8 @@ let s:subfigure =	"\\begin{subfigure}[<+ctb+>]{<+width+>}\<cr>\\centering\<cr><+
 let s:minipage =	"\\begin{minipage}[<+tb+>]{<+width+>}\<cr><++>\<cr>\\end{minipage}" . s:end_with_cr . "<++>"
 let s:picture =		"\\begin{picture}(<+width+>, <+height+>)(<+xoff+>,<+yoff+>)\<cr>\\put(<+xoff+>,<+yoff+>){\\framebox(<++>,<++>){<++>}}\<cr>\\end{picture}" . s:end_with_cr . "<++>"
 let s:tabular =		"\\begin{tabular}{<+format+>}\<cr><++>\<cr>\\end{tabular}%" . s:end_with_cr . "<++>"
-let s:tabular_star =	"\\begin{tabular*}[<+hbtp+>]{<+format+>}\<cr><++>\<cr>\\end{tabular*}"
-let s:table =		"\\begin{table}\<cr>\\centering\<cr>\\caption{<+Caption text+>}\<cr>\\begin{tabular}{<+dimensions+>}\<cr><++>\<cr>\\end{tabular}\<cr>\\label{" . s:labelprefix_table . "<+label+>}\<cr>\\end{table}" . s:end_with_cr . "<++>"
+let s:tabular_star =	"\\begin{tabular*}{<+format+>}\<cr><++>\<cr>\\end{tabular*}"
+let s:table =		"\\begin{table}[<+hbtp!+>]\<cr>\\centering\<cr>\\caption{<+Caption text+>}\<cr>\\begin{tabular}{<++>}\<cr><++>\<cr>\\end{tabular}\<cr>\\label{" . s:labelprefix_table . "<+label+>}\<cr>\\end{table}" . s:end_with_cr . "<++>"
 
 let s:code =		"\\begin{code}[<+htpb+>]\<cr>\\centering\<cr>\\caption{<+caption text+>}\<cr>\\lstinputlisting[language=<++>,firstline=<++>,lastline=<++>,firstnumber=<++>]{<++>}\<cr>\\label{" . s:labelprefix_code . "<+label+>}\<cr>\\end{code}" . s:end_with_cr . "<++>"
 
