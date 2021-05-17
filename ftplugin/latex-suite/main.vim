@@ -258,6 +258,8 @@ if !exists('s:doneMappings')
 	" Beamer {{{
 	call IMAP ('BUC', "\\uncover<<++>>{%\<cr><++>\<cr>}<++>", "tex")
 	call IMAP ('BON', "\\only<<++>>{%\<cr><++>\<cr>}<++>", "tex")
+	call IMAP ('BFT', "\\frametitle{<++>}<++>", "tex")
+	call IMAP ('BFS', "\\framesubtitle{<++>}<++>", "tex")
 	" }}}
 	" ProtectLetters: sets up identity maps for things like ``a {{{
 	" " Description: If we simply do

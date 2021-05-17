@@ -354,6 +354,7 @@ call s:Tex_SectionMacros('SSP', 'subparagraph')
 " }}}
 " Beamer {{{
 call s:Tex_EnvMacros('BFR', '&Beamer.', 'frame')
+call s:Tex_EnvMacros('BBL', '&Beamer.', 'block')
 " }}}
 " Miscellaneous {{{
 call s:Tex_SpecialMacros('', '', '-sepenv1-', ' :', 0)
