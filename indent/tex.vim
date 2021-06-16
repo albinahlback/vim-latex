@@ -92,11 +92,23 @@ endif
 if !exists('g:tex_items')
 	let g:tex_items = '\\bibitem\|\\item'
 endif
+if !exists("g:tex_noindent_mathematics_item")
+	let g:tex_noindent_mathematics_item = '=\|\\in\|\\ni\|\\equiv\|\\subset\|\\subseteq\|\\\\\|\\tx{\_.\{-}}'
+endif
+if !exists("g:tex_mathematical_env")
+    let g:tex_mathematical_env = '\%(equation\|multline\|align\|gather\)\%(\|*\)'
+endif
 if !exists("g:tex_itemize_env")
 	let g:tex_itemize_env = 'itemize\|description\|enumerateAlph\|enumeratealph\|enumeratearabic\|enumerateRoman\|enumerateroman\|enumerate\|thebibliography'
 endif
 if !exists("g:tex_noindent_env")
-	let g:tex_noindent_env = 'document\|verbatim\|comment\|lstlisting\|frame'
+	let g:tex_noindent_env = 'document\|verbatim\|comment\|lstlisting\|frame\|'
+	if g:tex_indent_items
+        let g:tex_noindent_env = g:tex_noindent_env . '\|' . g:tex_itemize_env
+    endif
+    if g:tex_noindent_mathematics
+        let g:tex_noindent_env = g:tex_noindent_env . '\|' . g:tex_mathematical_env
+    endif
 endif
 if !exists("g:tex_indent_ifelsefi")
 	let g:tex_indent_ifelsefi = 1
@@ -237,6 +249,15 @@ function! s:AssemblePatterns()
 
 		" Special treatment for items, they will hang
 		let hanging = g:tex_items
+
+        if g:tex_noindent_mathematics
+            " For mathematical environments: add or subtract two 'shiftwidth'
+            " let s:openextraregexp  = s:openextraregexp . '\|' . '\\begin\s*{\%('.g:tex_mathematical_env.'\)\*\?}'
+            " let s:closeextraregexp  = s:closeextraregexp . '\|' . '\\end\s*{\%('.g:tex_mathematical_env.'\)\*\?}'
+
+            " Special treatment for special mathematical items, they will hang
+            let hanging = hanging . '\|' . g:tex_noindent_mathematics_item
+        endif
 	else
 		" Extra environment indentation
 		let s:openextraregexp  = ''
@@ -244,7 +265,16 @@ function! s:AssemblePatterns()
 
 		" No hanging expression
 		let hanging = ''
+        if g:tex_noindent_mathematics
+            " For mathematical environments: add or subtract two 'shiftwidth'
+            " let s:openextraregexp  = '\\begin\s*{\%('.g:tex_mathematical_env.'\)\*\?}'
+            " let s:closeextraregexp  = '\\end\s*{\%('.g:tex_mathematical_env.'\)\*\?}'
+
+            " Special treatment for special mathematical items, they will hang
+            let hanging = g:tex_noindent_mathematics_item
+        endif
 	endif
+
 
 	if g:tex_indent_ifelsefi
 		" Do match '\if..' only if it is not followed by '{'

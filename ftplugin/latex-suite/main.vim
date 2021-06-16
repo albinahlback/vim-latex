@@ -218,7 +218,6 @@ if !exists('s:doneMappings')
 	call IMAP(g:Tex_Leader.'ß', '\varsigma', 'tex')
 	call IMAP(g:Tex_Leader.'t', '\tau', 'tex')
 	call IMAP(g:Tex_Leader.'u', '\upsilon', 'tex')
-	call IMAP(g:Tex_Leader.'v', '\varsigma', 'tex')
 	call IMAP(g:Tex_Leader.'w', '\omega', 'tex')
 	call IMAP(g:Tex_Leader.'x', '\xi', 'tex')
 	call IMAP(g:Tex_Leader.'y', '\psi', 'tex')
@@ -260,6 +259,18 @@ if !exists('s:doneMappings')
 	call IMAP ('BON', "\\only<<++>>{%\<cr><++>\<cr>}<++>", "tex")
 	call IMAP ('BFT', "\\frametitle{<++>}<++>", "tex")
 	call IMAP ('BFS', "\\framesubtitle{<++>}<++>", "tex")
+	" }}}
+	" Mathematical no-indent items {{{
+	" FIXME: Relies on tabwidth of 2.
+    if g:tex_noindent_mathematics
+		call IMAP (" =", "=", "tex")
+		call IMAP (" \\in", "\\in", "tex")
+		call IMAP (" \\ni", "\\ni", "tex")
+		call IMAP (" \\equiv", "\\equiv", "tex")
+		call IMAP (" \\subset", "\\subset", "tex")
+		call IMAP (" \\\\", "\\\\", "tex")
+		call IMAP (" \\tx", "\\tx", "tex")
+	endif
 	" }}}
 	" ProtectLetters: sets up identity maps for things like ``a {{{
 	" " Description: If we simply do

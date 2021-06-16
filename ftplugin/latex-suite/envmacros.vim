@@ -61,11 +61,14 @@ let s:list =		"\\begin{list}{<+label+>}{<+spacing+>}\<cr>\\item".s:items_with_cr
 let s:description =	"\\begin{description}\<cr>\\item[<+label+>]".s:items_with_cr."<++>\<cr>\\end{description}" . s:end_with_cr . "<++>"
 
 let s:array =		"\\left<++>\<cr>\\begin{array}{<+dimension+>}\<cr><+elements+>\<cr>\\end{array}\<cr>\\right<++>"
-let s:equation =	"\\begin{equation}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{equation}" . s:end_with_cr . "<++>"
-let s:align =		"\\begin{align}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}<++>\<cr>\\end{align}" . s:end_with_cr . "<++>"
-let s:alignstar =	"\\begin{align*}\<cr><++>\<cr>\\end{align*}" . s:end_with_cr . "<++>"
-let s:multline =	"\\begin{multline}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{multline}" . s:end_with_cr . "<++>"
-let s:gather =		"\\begin{gather}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{gather}" . s:end_with_cr . "<++>"
+let s:equation =	"\\begin{equation}\<cr>\ \ <++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\<BS>\<BS>\\end{equation}" . s:end_with_cr . "<++>"
+let s:equationstar =	"\\begin{equation*}\<cr><++>\<cr>\\end{equation*}" . s:end_with_cr . "<++>"
+let s:align =		"\\begin{align}\<cr>\ \ <++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}<++>\<cr>\<BS>\<BS>\\end{align}" . s:end_with_cr . "<++>"
+let s:alignstar =	"\\begin{align*}\<cr>\ \ <++>\<cr>\<BS>\<BS>\\end{align*}" . s:end_with_cr . "<++>"
+let s:multline =	"\\begin{multline}\<cr>\ \ <++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\<BS>\<BS>\\end{multline}" . s:end_with_cr . "<++>"
+let s:multlinestar =	"\\begin{multline*}\<cr>\ \ <++>\<cr>\<bs>\<BS>\\end{multline*}" . s:end_with_cr . "<++>"
+let s:gather =		"\\begin{gather}\<cr>\ \ <++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\<BS>\<BS>\\end{gather}" . s:end_with_cr . "<++>"
+let s:gatherstar =	"\\begin{gather*}\<cr>\ \ <++>\<cr>\<BS>\<BS>\\end{gather*}" . s:end_with_cr . "<++>"
 
 let s:smallmatrix =	"\\begin{smallmatrix} <++> \\end{smallmatrix}<++>"
 let s:psmallmatrix =	"\\begin{psmallmatrix} <++> \\end{psmallmatrix}<++>"
@@ -280,8 +283,11 @@ call s:Tex_SpecialMacros('MAL', '&Math.', 'align', s:align)
 call s:Tex_SpecialMacros('MAS', '&Math.', 'align*', s:alignstar)
 call s:Tex_SpecialMacros('MAR', 'Math.', 'array', s:array)
 call s:Tex_SpecialMacros('MEQ', '&Math.', 'equation', s:equation)
+call s:Tex_SpecialMacros('MES', '&Math.', 'equation*', s:equationstar)
 call s:Tex_SpecialMacros('MGA', '&Math.', 'gather', s:gather)
+call s:Tex_SpecialMacros('MGS', '&Math.', 'gather*', s:gatherstar)
 call s:Tex_SpecialMacros('MML', '&Math.', 'multline', s:multline)
+call s:Tex_SpecialMacros('MMS', '&Math.', 'multline*', s:multlinestar)
 call s:Tex_SpecialMacros('MSM', '&Math.', 'smallmatrix', s:smallmatrix)
 call s:Tex_SpecialMacros('MPSM', '&Math.', 'psmallmatrix', s:psmallmatrix)
 call s:Tex_SpecialMacros('MBSM', '&Math.', 'bsmallmatrix', s:bsmallmatrix)
@@ -293,10 +299,7 @@ call s:Tex_SpecialMacros('MCM', '&Math.', 'Bmatrix', s:Bmatrix)
 call s:Tex_EnvMacros('MAD', '&Math.', 'aligned')
 call s:Tex_EnvMacros('MCA', '&Math.', 'cases')
 call s:Tex_EnvMacros('MDM', '&Math.', 'displaymath')
-call s:Tex_EnvMacros('MES', '&Math.', 'equation*')
-call s:Tex_EnvMacros('MGS', '&Math.', 'gather*')
 call s:Tex_EnvMacros('MMA', '&Math.', 'math')
-call s:Tex_EnvMacros('MMS', '&Math.', 'multline*')
 call s:Tex_EnvMacros('MSE', '&Math.', 'subequations')
 call s:Tex_EnvMacros('MSP', '&Math.', 'split')
 " }}}
