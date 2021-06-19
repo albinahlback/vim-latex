@@ -69,6 +69,7 @@ let s:gather =		"\\begin{gather}\<cr><++>\<cr>\\label{" . s:labelprefix_equation
 
 let s:smallmatrix =	"\\begin{smallmatrix} <++> \\end{smallmatrix}<++>"
 let s:psmallmatrix =	"\\begin{psmallmatrix} <++> \\end{psmallmatrix}<++>"
+let s:psmatrix =	"\\begin{psmatrix} <++> \\end{psmatrix}<++>"
 let s:bsmallmatrix =	"\\begin{bsmallmatrix} <++> \\end{bsmallmatrix}<++>"
 let s:Bsmallmatrix =	"\\begin{Bsmallmatrix} <++> \\end{Bsmallmatrix}<++>"
 let s:matrix =		"\\begin{matrix} <++> \\end{matrix}<++>"
@@ -284,6 +285,7 @@ call s:Tex_SpecialMacros('MGA', '&Math.', 'gather', s:gather)
 call s:Tex_SpecialMacros('MML', '&Math.', 'multline', s:multline)
 call s:Tex_SpecialMacros('MSM', '&Math.', 'smallmatrix', s:smallmatrix)
 call s:Tex_SpecialMacros('MPSM', '&Math.', 'psmallmatrix', s:psmallmatrix)
+call s:Tex_SpecialMacros('MPsM', '&Math.', 'psmatrix', s:psmatrix)
 call s:Tex_SpecialMacros('MBSM', '&Math.', 'bsmallmatrix', s:bsmallmatrix)
 call s:Tex_SpecialMacros('MCSM', '&Math.', 'Bsmallmatrix', s:Bsmallmatrix)
 call s:Tex_SpecialMacros('MMX', '&Math.', 'matrix', s:matrix)
