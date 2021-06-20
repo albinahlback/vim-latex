@@ -155,6 +155,7 @@ if !exists('s:doneMappings')
 	" functions/operations with inputs {{{
 	call IMAP (g:Tex_Leader.'2', '\sqrt{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'/', '\frac{<++>}{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader.'÷', '\tfrac{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'bin', '\binom{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'lim', '\lim_{<++>}<++>', "tex")
 	" }}}
