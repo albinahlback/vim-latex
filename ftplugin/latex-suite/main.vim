@@ -157,6 +157,7 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader.'/', '\frac{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.'÷', '\tfrac{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'bin', '\binom{<++>}{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'mbin', '\mbinom{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'lim', '\lim_{<++>}<++>', "tex")
 	" }}}
 	" symbols {{{
