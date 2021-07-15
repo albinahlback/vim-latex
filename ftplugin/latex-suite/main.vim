@@ -118,6 +118,7 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader2.'div', '\divides', "tex")
 	call IMAP (g:Tex_Leader2.'def', '\defeq', "tex")
 	call IMAP (g:Tex_Leader2.'fed', '\qefed', "tex")
+	call IMAP (g:Tex_Leader2.'bp', '\boxplus', "tex")
 	" }}}
 	" mathematical generic tweaking {{{
 	call IMAP (g:Tex_Leader2.'os', '\overset{<+over+>}{<+center+>}<++>', "tex")
