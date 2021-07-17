@@ -208,7 +208,11 @@ function! Tex_InsertSizing()
         exe "normal! o\<Esc>0D"
         exe 'normal! i'.repeat(" ", indentation).'\'.sizer.'r'.rbracket
         exe linestart+1
-        exe "normal! \<S-v>".(lineend - linestart)."j>"
+        if lineend - linestart == 0
+            exe "normal! \<S-v>>"
+        else
+            exe "normal! \<S-v>".(lineend - linestart)."j>"
+        endif
     endif
 endfunction " }}}
 " PromptForEnvironment: prompts for brackets {{{
