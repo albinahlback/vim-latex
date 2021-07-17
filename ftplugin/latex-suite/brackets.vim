@@ -162,8 +162,8 @@ function! Tex_ChangeSizing()
 	exe 'echomsg "You are within a '.sizer_name.' sizer."'
 	let change_sizer = PromptForSizer('What do you want to change it to?')
 	let w = search('\\'.sizer_name.'l', "b")
-	exe 'normal '.string(length_sizer+2).'x'
-	exe 'normal i\'.change_sizer.'l'
+	exe 'normal! '.string(length_sizer+2).'x'
+	exe 'normal! i\'.change_sizer.'l'
 	let counter = 1
 	while counter > 0
 		let w = search('\\'.sizer_name.'r\|\\'.sizer_name.'l')
@@ -178,19 +178,38 @@ function! Tex_ChangeSizing()
 			return ""
 		endif
 	endwhile
-	exe 'normal '.string(length_sizer+2).'x'
-	exe 'normal i\'.change_sizer.'r'
+	exe 'normal! '.string(length_sizer+2).'x'
+	exe 'normal! i\'.change_sizer.'r'
 	cal cursor(this_line, this_col + len(change_sizer) - length_sizer)
 endfunction " }}}
-"Tex_ChangeSizingVisual: maps <F4> when in visual mode {{{
-function! Tex_ChangeSizingVisual()
+"Tex_InsertSizing: maps <F4> when in visual mode {{{
+function! Tex_InsertSizing()
 	let sizer = PromptForSizer('What sizer do you want?')
 	let brackets = PromptForBrackets('What brackets does the sir want?')
 	let spaceIndex = match(brackets, ' ')
 	let lbracket = brackets[0:spaceIndex-1]
 	let rbracket = brackets[spaceIndex+1:-1]
-	exe 'normal `<i\'.sizer.'l'.lbracket.' '
-	exe 'normal `>'.(len(sizer)+len(lbracket)+3).'la \'.sizer.'r'.rbracket
+    let linestart = line("'<")
+    let [lineend, columnend] = getpos("'>")[1:2]
+    if columnend != 2147483647 " Not end of line
+        if linestart == lineend
+            exe 'normal! `<i\'.sizer.'l'.lbracket.' '
+            exe 'normal! `>'.(len(sizer)+len(lbracket)+3).'la \'.sizer.'r'.rbracket
+        else
+            exe 'normal! `<i\'.sizer.'l'.lbracket.' '
+            exe 'normal! `>a \'.sizer.'r'.rbracket
+        endif
+    else " End of lines
+        let indentation = indent(linestart)
+        exe linestart
+        exe "normal! O\<Esc>0D"
+        exe 'normal! i'.repeat(" ", indentation).'\'.sizer.'l'.lbracket
+        exe lineend+1
+        exe "normal! o\<Esc>0D"
+        exe 'normal! i'.repeat(" ", indentation).'\'.sizer.'r'.rbracket
+        exe linestart+1
+        exe "normal! \<S-v>".(lineend - linestart)."j>"
+    endif
 endfunction " }}}
 " PromptForEnvironment: prompts for brackets {{{
 " Description: 
@@ -213,7 +232,7 @@ vnoremap <silent> <Plug>Tex_MathBB			<C-C>`>a}<Esc>`<i\mathbb{<Esc>
 vnoremap <silent> <Plug>Tex_MathBF			<C-C>`>a}<Esc>`<i\mathbf{<Esc>
 vnoremap <silent> <Plug>Tex_MathCal			<C-C>`>a}<Esc>`<i\mathcal{<Esc>
 vnoremap <silent> <Plug>Tex_MathDS			<C-C>`>a}<Esc>`<i\mathds{<Esc>
-vnoremap <silent> <Plug>Tex_ChangeSizing	<C-C>:call Tex_ChangeSizingVisual()<CR>
+vnoremap <silent> <Plug>Tex_InsertSizing	<C-C>:call Tex_InsertSizing()<CR>
 nnoremap <silent> <Plug>Tex_LeftRight		:call Tex_PutLeftRight()<CR>
 nnoremap <silent> <Plug>Tex_ChangeSizing	:call Tex_ChangeSizing()<CR>
 " }}}
@@ -230,7 +249,7 @@ function! <SID>Tex_SetBracketingMaps()
 		call Tex_MakeMap('<M-f>', '<Plug>Tex_MathBF', 'v', '<buffer> <silent>')
 		call Tex_MakeMap('<M-c>', '<Plug>Tex_MathCal', 'v', '<buffer> <silent>')
 		call Tex_MakeMap('<M-d>', '<Plug>Tex_MathDS', 'v', '<buffer> <silent>')
-		call Tex_MakeMap('<F4>', '<Plug>Tex_ChangeSizing', 'v', '<buffer> <silent>')
+		call Tex_MakeMap('<F4>', '<Plug>Tex_InsertSizing', 'v', '<buffer> <silent>')
 		call Tex_MakeMap('<M-l>', '<Plug>Tex_LeftRight', 'n', '<buffer> <silent>')
 		call Tex_MakeMap('<F4>', '<Plug>Tex_ChangeSizing', 'n', '<buffer> <silent>')
 	endif
