@@ -56,6 +56,10 @@ if !exists('s:doneMappings')
 	call IMAP ('«', '\langle <++>', "tex")
 	call IMAP ('»', '\rangle<++>', "tex")
 	call IMAP ('\langle »', '\langle <++> \rangle<++>', "tex")
+	call IMAP (g:Tex_Leader2.'lf', '\lfloor', "tex")
+	call IMAP (g:Tex_Leader2.'rf', '\rfloor', "tex")
+	call IMAP (g:Tex_Leader2.'lc', '\lceil', "tex")
+	call IMAP (g:Tex_Leader2.'rc', '\rceil', "tex")
 	" }}}
 	" different size brackets {{{
 	call IMAP (g:Tex_Leader2.'(', '\bigl( <++> \bigr)<++>', "tex")
