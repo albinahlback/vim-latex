@@ -823,17 +823,10 @@ if g:Tex_PromptedEnvironments != ''
 	"
 	function! Tex_ChangeEnvironments()
 
-		let env_line = searchpair('\$\$\|\\\[\|\\begin{', '', '\$\$\|\\\]\|\\end{.\{-}}\zs', "bncW")
 
-		if env_line != 0
-			if getline(env_line) !~ 'begin{'
-				let env_name = '['
-			else
-				let env_name = matchstr(getline(env_line), 'begin{\zs.\{-}\ze}')
-			endif
-		endif
-
-		if !exists('env_name')
+		let env_name = Tex_GetCurrentEnv()
+		
+		if env_name == ''
 			echomsg "You are not inside environment"
 			return 0
 		endif
@@ -887,10 +880,23 @@ if g:Tex_PromptedEnvironments != ''
 			let second = '\end{' . a:env . '}'
 		endif
 
-		let bottom = searchpair('\\\[\|\\begin{','','\\\]\|\\end{.\{-}}\zs','W')
-		s/\\\]\|\\end{.\{-}}/\=second/
-		let top = searchpair('\\\[\|\\begin{','','\\\]\|\\end{.\{-}}\zs','bW')
-		s/\\\[\|\\begin{.\{-}}/\=first/
+		let match_no_comment = '\%(\\\@<!\%(\\\\\)*%.*\)\@<!'
+
+		let top = searchpair(match_no_comment . '\%(\\\[\|\\begin{.\{-}}\)','', match_no_comment . '\%(\\\]\|\\end{.\{-}}\)\zs','cbW')
+		let ix = getcurpos()[2]
+
+		if  getline(top)[ix-1:] !~# '^\\begin{'
+			let pat1 = '['
+			let pat2 = ']'
+		else
+			let pat1 = '}'
+			let pat2 = '}'
+		end
+
+		exe "normal cf" . pat1 . "\<c-r>=first\<c-m>"
+
+		let bottom = searchpair(match_no_comment . '\%(\\\[\|\\begin{\)','', match_no_comment . '\%(\\\]\|\\end{.\{-}}\)','W')
+		exe "normal cf" . pat2 . "\<c-r>=second\<c-m>"
 
 		if a:delete != ''
 			exe 'silent '. top . "," . bottom . 's/' . a:delete . '//e'
@@ -990,30 +996,29 @@ endfunction " }}}
 " Author: Albin Ahlbäck
 function! Tex_GetCurrentEnv()
 	let pos = Tex_GetPos()
-	let n = 0
-	while 1
-		let env_line = search('\%(\\\@<!\%(\\\\\)*%.*\)\@<!\\\%(begin\|end\){', 'bW')
-		if env_line == 0
-			" we reached the beginning of the file, so we return the empty string
-			call Tex_SetPos(pos)
-			return ''
-		endif
-		let ix = getcurpos()[2]
-		if getline(env_line)[ix] == 'b'
-			if n == 0
-				let env_line = search('{\%(\|\_s*\)\w', 'e')
-				let ix = getcurpos()[2]
-				call search('\a\>')
-				let iy = getcurpos()[2]
-				call Tex_SetPos(pos)
-				return getline(env_line)[ix-1:iy-1]
-			else
-				let n = n - 1
-			endif
+
+	let env_name = ''
+	let match_no_comment = '\%(\\\@<!\%(\\\\\)*%.*\)\@<!'
+
+	let env_line = searchpair(
+				\ match_no_comment . '\%(\$\$\|\\\[\|\\begin{\)',
+				\ '',
+				\ match_no_comment . '\%(\$\$\|\\\]\|\\end{.\{-}}\)\zs',
+				\ "bcW")
+
+	let ix = getcurpos()[2]
+
+	if env_line != 0
+		let line = getline(env_line)[ix-1:]
+		if line !~# '^\\begin{'
+			let env_name = '['
 		else
-			let n = n + 1
+			let env_name = matchstr(line, '^\\begin{\zs.\{-}\ze}')
 		endif
-	endwhile
+	endif
+
+	call Tex_SetPos(pos)
+	return env_name
 endfunction
 " }}}
 " Tex_InsertItem: insert \item into a list   {{{
