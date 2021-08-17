@@ -893,10 +893,10 @@ if g:Tex_PromptedEnvironments != ''
 			let pat2 = '}'
 		end
 
-		exe "normal cf" . pat1 . "\<c-r>=first\<c-m>"
+		exe "normal! cf" . pat1 . "\<c-r>=first\<c-m>"
 
 		let bottom = searchpair(match_no_comment . '\%(\\\[\|\\begin{\)','', match_no_comment . '\%(\\\]\|\\end{.\{-}}\)','W')
-		exe "normal cf" . pat2 . "\<c-r>=second\<c-m>"
+		exe "normal! cf" . pat2 . "\<c-r>=second\<c-m>"
 
 		if a:delete != ''
 			exe 'silent '. top . "," . bottom . 's/' . a:delete . '//e'
@@ -919,7 +919,7 @@ if g:Tex_PromptedEnvironments != ''
 				if local_label != ''
 					put = '\label{'.local_label.'}'
 				endif
-				normal $
+				normal! $
 			endif
 		elseif a:label == 2
 		else
@@ -1187,7 +1187,7 @@ if g:Tex_PromptedCommands != ''
 		let com_line = searchpair('\\\k\{-}{', '', '}', 'b')
 
 		if com_line != 0
-			normal l
+			normal! l
 			let com_name = expand('<cword>')
 		endif
 

@@ -898,7 +898,7 @@ function! ExecMap(prefix, mode)
 		else
 			let gotoc = ''
 		endif
-		exec "normal ".gotoc.mapCmd
+		exec "normal! ".gotoc.mapCmd
 	endif
 	exec a:mode.'noremap '.a:prefix.' '.myMap
 endfunction
