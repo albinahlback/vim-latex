@@ -2,7 +2,7 @@
 " 	     File: envmacros.vim
 "      Author: Mikolaj Machowski
 "     Created: Tue Apr 23 08:00 PM 2002 PST
-"  Description: mappings/menus for environments. 
+"  Description: mappings/menus for environments.
 "=============================================================================
 
 if !g:Tex_EnvironmentMaps && !g:Tex_EnvironmentMenus
@@ -30,22 +30,67 @@ else
 	let s:items_with_cr = " "
 end
 
-" The prefix of labels of figures
+" The prefix of labels
 let s:labelprefix_figure = Tex_GetVarValue("Tex_EnvLabelprefix_{'figure'}")
+let s:labelprefix_subfigure = Tex_GetVarValue("Tex_EnvLabelprefix_{'subfigure'}")
+let s:labelprefix_code = Tex_GetVarValue("Tex_EnvLabelprefix_{'code'}")
 let s:labelprefix_table = Tex_GetVarValue("Tex_EnvLabelprefix_{'table'}")
+let s:labelprefix_equation = Tex_GetVarValue("Tex_EnvLabelprefix_{'equation'}")
+let s:labelprefix_theorem = Tex_GetVarValue("Tex_EnvLabelprefix_{'theorem'}")
+let s:labelprefix_proposition = Tex_GetVarValue("Tex_EnvLabelprefix_{'proposition'}")
+let s:labelprefix_lemma = Tex_GetVarValue("Tex_EnvLabelprefix_{'lemma'}")
+let s:labelprefix_conjecture = Tex_GetVarValue("Tex_EnvLabelprefix_{'conjecture'}")
+let s:labelprefix_corollary = Tex_GetVarValue("Tex_EnvLabelprefix_{'corollary'}")
+let s:labelprefix_definition = Tex_GetVarValue("Tex_EnvLabelprefix_{'definition'}")
+let s:labelprefix_example = Tex_GetVarValue("Tex_EnvLabelprefix_{'example'}")
+let s:labelprefix_method = Tex_GetVarValue("Tex_EnvLabelprefix_{'method'}")
+let s:labelprefix_axiom = Tex_GetVarValue("Tex_EnvLabelprefix_{'axiom'}")
 
 " Define environments for IMAP evaluation " {{{
-let s:figure =     "\\begin{figure}[<+htpb+>]\<cr>\\centering\<cr>\\includegraphics{<+file+>}\<cr>\\caption{<+caption text+>}\<cr>\\label{" . s:labelprefix_figure . "<+label+>}\<cr>\\end{figure}" . s:end_with_cr . "<++>"
-let s:minipage =   "\\begin{minipage}[<+tb+>]{<+width+>}\<cr><++>\<cr>\\end{minipage}" . s:end_with_cr . "<++>"
-let s:picture =    "\\begin{picture}(<+width+>, <+height+>)(<+xoff+>,<+yoff+>)\<cr>\\put(<+xoff+>,<+yoff+>){\\framebox(<++>,<++>){<++>}}\<cr>\\end{picture}" . s:end_with_cr . "<++>"
-let s:list =       "\\begin{list}{<+label+>}{<+spacing+>}\<cr>\\item".s:items_with_cr."<++>\<cr>\\end{list}" . s:end_with_cr . "<++>"
-let s:table =      "\\begin{table}\<cr>\\centering\<cr>\\begin{tabular}{<+dimensions+>}\<cr><++>\<cr>\\end{tabular}\<cr>\\caption{<+Caption text+>}\<cr>\\label{" . s:labelprefix_table . "<+label+>}\<cr>\\end{table}" . s:end_with_cr . "<++>"
-let s:array =      "\\left<++>\<cr>\\begin{array}{<+dimension+>}\<cr><+elements+>\<cr>\\end{array}\<cr>\\right<++>"
-let s:description ="\\begin{description}\<cr>\\item[<+label+>]".s:items_with_cr."<++>\<cr>\\end{description}" . s:end_with_cr . "<++>"
-let s:document =   "\\documentclass[<+options+>]{<+class+>}\<cr>\<cr>\\begin{document}\<cr><++>\<cr>\\end{document}"
-let s:tabular = "\\begin{tabular}[<+hbtp+>]{<+format+>}\<cr><++>\<cr>\\end{tabular}"
-let s:tabular_star = "\\begin{tabular*}[<+hbtp+>]{<+format+>}\<cr><++>\<cr>\\end{tabular*}"
+let s:document =	"\\documentclass[<+options+>]{<+class+>}\<cr>\<cr>\\begin{document}\<cr><++>\<cr>\\end{document}"
 
+let s:figure =		"\\begin{figure}[<+htpb+>]\<cr>\\centering\<cr><+picture+>\<cr>\\caption{<+caption text+>}\<cr>\\label{" . s:labelprefix_figure . "<+label+>}\<cr>\\end{figure}" . s:end_with_cr . "<++>"
+let s:subfigure =	"\\begin{subfigure}[<+ctb+>]{<+width+>}\<cr>\\centering\<cr><+picture+>\<cr>\\caption{<+caption text+>}\<cr>\\label{" . s:labelprefix_subfigure . "<+label+>}\<cr>\\end{subfigure}" . s:end_with_cr . "<++>"
+let s:minipage =	"\\begin{minipage}[<+tb+>]{<+width+>}\<cr><++>\<cr>\\end{minipage}" . s:end_with_cr . "<++>"
+let s:picture =		"\\begin{picture}(<+width+>, <+height+>)(<+xoff+>,<+yoff+>)\<cr>\\put(<+xoff+>,<+yoff+>){\\framebox(<++>,<++>){<++>}}\<cr>\\end{picture}" . s:end_with_cr . "<++>"
+let s:tabular =		"\\begin{tabular}{<+format+>}\<cr><++>\<cr>\\end{tabular}%" . s:end_with_cr . "<++>"
+let s:tabular_star =	"\\begin{tabular*}{<+format+>}\<cr><++>\<cr>\\end{tabular*}"
+let s:table =		"\\begin{table}[<+hbtp!+>]\<cr>\\centering\<cr>\\caption{<+Caption text+>}\<cr>\\begin{tabular}{<++>}\<cr><++>\<cr>\\end{tabular}\<cr>\\label{" . s:labelprefix_table . "<+label+>}\<cr>\\end{table}" . s:end_with_cr . "<++>"
+
+let s:code =		"\\begin{code}[<+htpb+>]\<cr>\\centering\<cr>\\caption{<+caption text+>}\<cr>\\lstinputlisting[language=<++>,firstline=<++>,lastline=<++>,firstnumber=<++>]{<++>}\<cr>\\label{" . s:labelprefix_code . "<+label+>}\<cr>\\end{code}" . s:end_with_cr . "<++>"
+
+let s:tikzpicture =	"\\begin{tikzpicture}\<cr><++>\<cr>\\end{tikzpicture}" . s:end_with_cr . "<++>"
+
+let s:list =		"\\begin{list}{<+label+>}{<+spacing+>}\<cr>\\item".s:items_with_cr."<++>\<cr>\\end{list}" . s:end_with_cr . "<++>"
+let s:description =	"\\begin{description}\<cr>\\item[<+label+>]".s:items_with_cr."<++>\<cr>\\end{description}" . s:end_with_cr . "<++>"
+
+let s:array =		"\\left<++>\<cr>\\begin{array}{<+dimension+>}\<cr><+elements+>\<cr>\\end{array}\<cr>\\right<++>"
+let s:equation =	"\\begin{equation}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{equation}" . s:end_with_cr . "<++>"
+let s:align =		"\\begin{align}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}<++>\<cr>\\end{align}" . s:end_with_cr . "<++>"
+let s:alignstar =	"\\begin{align*}\<cr><++>\<cr>\\end{align*}" . s:end_with_cr . "<++>"
+let s:multline =	"\\begin{multline}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{multline}" . s:end_with_cr . "<++>"
+let s:gather =		"\\begin{gather}\<cr><++>\<cr>\\label{" . s:labelprefix_equation . "<+label+>}\<cr>\\end{gather}" . s:end_with_cr . "<++>"
+
+let s:smallmatrix =	"\\begin{smallmatrix} <++> \\end{smallmatrix}<++>"
+let s:psmallmatrix =	"\\begin{psmallmatrix} <++> \\end{psmallmatrix}<++>"
+let s:psmatrix =	"\\begin{psmatrix} <++> \\end{psmatrix}<++>"
+let s:bsmallmatrix =	"\\begin{bsmallmatrix} <++> \\end{bsmallmatrix}<++>"
+let s:Bsmallmatrix =	"\\begin{Bsmallmatrix} <++> \\end{Bsmallmatrix}<++>"
+let s:matrix =		"\\begin{matrix}\<cr><++>\<cr>\\end{matrix}<++>"
+let s:pmatrix =		"\\begin{pmatrix}\<cr><++>\<cr>\\end{pmatrix}<++>"
+let s:bmatrix =		"\\begin{bmatrix}\<cr><++>\<cr>\\end{bmatrix}<++>"
+let s:Bmatrix =		"\\begin{Bmatrix}\<cr><++>\<cr>\\end{Bmatrix}<++>"
+
+let s:definition =	"\\begin{definition}\\label{" . s:labelprefix_definition . "<+label+>}\<cr><++>\<cr>\\end{definition}" . s:end_with_cr . "<++>"
+let s:theorem =		"\\begin{theorem}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{theorem}" . s:end_with_cr . "<++>"
+let s:proposition =	"\\begin{proposition}\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{proposition}" . s:end_with_cr . "<++>"
+let s:lemma =		"\\begin{lemma}\\label{" . s:labelprefix_lemma . "<+label+>}\<cr><++>\<cr>\\end{lemma}" . s:end_with_cr . "<++>"
+let s:corollary =	"\\begin{corollary}\\label{" . s:labelprefix_corollary . "<+label+>}\<cr><++>\<cr>\\end{corollary}" . s:end_with_cr . "<++>"
+let s:conjecture =	"\\begin{conjecture}\\label{" . s:labelprefix_conjecture . "<+label+>}\<cr><++>\<cr>\\end{conjecture}" . s:end_with_cr . "<++>"
+let s:example =		"\\begin{example}\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{example}" . s:end_with_cr . "<++>"
+let s:exercise =	"\\begin{exercise}\\label{" . s:labelprefix_example . "<+label+>}\<cr><++>\<cr>\\end{exercise}" . s:end_with_cr . "<++>"
+let s:method =		"\\begin{method}\\label{" . s:labelprefix_method . "<+label+>}\<cr><++>\<cr>\\end{method}" . s:end_with_cr . "<++>"
+let s:axiom =		"\\begin{axiom}\\label{" . s:labelprefix_axiom . "<+label+>}\<cr><++>\<cr>\\end{axiom}" . s:end_with_cr . "<++>"
 " }}}
 " define environments with special behavior in line wise selection. {{{
 if !exists('s:vis_center_left')
@@ -66,7 +111,7 @@ if !exists('s:vis_center_left')
 endif
 " }}}
 " Tex_EnvMacros: sets up maps and menus for environments {{{
-" Description: 
+" Description:
 function! <SID>Tex_EnvMacros(lhs, submenu, name)
 
 	let vright = ''
@@ -78,7 +123,7 @@ function! <SID>Tex_EnvMacros(lhs, submenu, name)
 	let vrhs = "\<C-\\>\<C-N>:call VEnclose('".vleft."', '".vright."', '\\begin{".a:name."}', '\\end{".a:name."}')\<CR>"
 	let location = g:Tex_EnvMenuLocation.a:submenu.a:name.'<tab>'
 
-	if a:lhs != '' 
+	if a:lhs != ''
 
 		let vlhs = g:Tex_Leader2.substitute(tolower(a:lhs), '^.', '', '')
 		let location = location.a:lhs.'\ ('.vlhs.')'
@@ -95,11 +140,11 @@ function! <SID>Tex_EnvMacros(lhs, submenu, name)
 		exe 'vmenu '.location.' '.vrhs
 	endif
 
-endfunction 
+endfunction
 
 " }}}
 " Tex_SpecialMacros: macros with special right hand sides {{{
-" Description: 
+" Description:
 function! <SID>Tex_SpecialMacros(lhs, submenu, name, irhs, ...)
 
 	let wiz = 1
@@ -140,7 +185,7 @@ function! <SID>Tex_SpecialMacros(lhs, submenu, name, irhs, ...)
 
 endfunction " }}}
 " Tex_SectionMacros: creates section maps and menus {{{
-" Description: 
+" Description:
 function! <SID>Tex_SectionMacros(lhs, name)
 
 	let vlhs = g:Tex_Leader2.substitute(tolower(a:lhs), '^.', '', '')
@@ -176,8 +221,7 @@ call s:Tex_SpecialMacros('', '', 'renewenvironment*',  '\renewenvironment*{<++>}
 call s:Tex_SpecialMacros('', '', '-sepenv0-', ' :', 0)
 " }}}
 " Environments specific commands {{{
-call s:Tex_SpecialMacros('', 'Env&Commands.&Lists.', '&item',     '\item', 0)
-call s:Tex_SpecialMacros('', 'Env&Commands.&Lists.', 'i&tem[]',    '\item[<++>]<++>', 0)
+call s:Tex_SpecialMacros('LDI', 'Env&Commands.&Lists.', 'i&tem[]',    "\<cr>\\item[<++>] <++>", 0)
 call s:Tex_SpecialMacros('', 'Env&Commands.&Lists.', '&bibitem{}', '\bibitem{<++>}<++>', 0)
 call s:Tex_SpecialMacros('', 'Env&Commands.&Tabbing.', '\\&=', '\=', 0)
 call s:Tex_SpecialMacros('', 'Env&Commands.&Tabbing.', '\\&>', '\>', 0)
@@ -193,9 +237,9 @@ call s:Tex_SpecialMacros('', 'Env&Commands.&Tabbing.', '&grave\ \\CHAR`', '\<++>
 call s:Tex_SpecialMacros('', 'Env&Commands.&Tabbing.', 'p&ushtabs', '\pushtabs', 0)
 call s:Tex_SpecialMacros('', 'Env&Commands.&Tabbing.', 'p&optabs', '\poptabs', 0)
 call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&hline', '\hline', 0)
-call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&cline', '\cline', 0) 
-call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&\&', '&', 0) 
-call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&\\\\', '\\', 0) 
+call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&cline', '\cline', 0)
+call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&\&', '&', 0)
+call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&\\\\', '\\', 0)
 call s:Tex_SpecialMacros('', 'EnvCommands.&Tabular.', '&multicolumn{}{}{}', '\multicolumn{<++>}{<++>}{<++>}<++>', 0)
 call s:Tex_SpecialMacros('', 'EnvCommands.Le&tter.', '&makelabels', '\makelabels', 0)
 call s:Tex_SpecialMacros('', 'EnvCommands.Le&tter.', '&address', '\address', 0)
@@ -219,12 +263,17 @@ call s:Tex_SpecialMacros('', '', '-sepenv0-', ' :', 0)
 call s:Tex_SpecialMacros('ELI', '&Lists.',  'list', s:list)
 call s:Tex_SpecialMacros('EDE', '&Lists.',  'description', s:description)
 call s:Tex_EnvMacros('EEN', '&Lists.', 'enumerate')
+call s:Tex_EnvMacros('ENAl', '&Lists.', 'enumerateAlph')
+call s:Tex_EnvMacros('ENal', '&Lists.', 'enumeratealph')
+call s:Tex_EnvMacros('ENar', '&Lists.', 'enumeratearabic')
+call s:Tex_EnvMacros('ENRo', '&Lists.', 'enumerateRoman')
+call s:Tex_EnvMacros('ENro', '&Lists.', 'enumerateroman')
 call s:Tex_EnvMacros('EIT', '&Lists.', 'itemize')
 call s:Tex_EnvMacros('ETI', '&Lists.', 'theindex')
 call s:Tex_EnvMacros('ETL', '&Lists.', 'trivlist')
 " }}}
 " Tables {{{
-call s:Tex_SpecialMacros('ETE', '&Tables.', 'table', s:table)
+call s:Tex_SpecialMacros('ETA', '&Tables.', 'table', s:table)
 call s:Tex_EnvMacros('ETG', '&Tables.', 'tabbing')
 call s:Tex_EnvMacros('',    '&Tables.', 'table*')
 call s:Tex_EnvMacros('',    '&Tables.', 'table2')
@@ -232,18 +281,51 @@ call s:Tex_SpecialMacros('ETR', '&Tables.', 'tabular', s:tabular)
 call s:Tex_SpecialMacros('', '&Tables.', 'tabular*', s:tabular_star)
 " }}}
 " Math {{{
-call s:Tex_EnvMacros('EAL', '&Math.', 'align')
-call s:Tex_EnvMacros('EAS', '&Math.', 'align*')
-call s:Tex_EnvMacros('EAD', '&Math.', 'aligned')
-call s:Tex_EnvMacros('EAR', '&Math.', 'array')
-call s:Tex_EnvMacros('EDM', '&Math.', 'displaymath')
-call s:Tex_EnvMacros('EEQ', '&Math.', 'equation')
-call s:Tex_EnvMacros('EES', '&Math.', 'equation*')
-call s:Tex_EnvMacros('EMA', '&Math.', 'math')
-call s:Tex_EnvMacros('ESE', '&Math.', 'subequations')
+call s:Tex_SpecialMacros('MAL', '&Math.', 'align', s:align)
+call s:Tex_SpecialMacros('MAS', '&Math.', 'align*', s:alignstar)
+call s:Tex_SpecialMacros('MAR', 'Math.', 'array', s:array)
+call s:Tex_SpecialMacros('MEQ', '&Math.', 'equation', s:equation)
+call s:Tex_SpecialMacros('MGA', '&Math.', 'gather', s:gather)
+call s:Tex_SpecialMacros('MML', '&Math.', 'multline', s:multline)
+call s:Tex_SpecialMacros('MSM', '&Math.', 'smallmatrix', s:smallmatrix)
+call s:Tex_SpecialMacros('MPSM', '&Math.', 'psmallmatrix', s:psmallmatrix)
+call s:Tex_SpecialMacros('MPsM', '&Math.', 'psmatrix', s:psmatrix)
+call s:Tex_SpecialMacros('MBSM', '&Math.', 'bsmallmatrix', s:bsmallmatrix)
+call s:Tex_SpecialMacros('MCSM', '&Math.', 'Bsmallmatrix', s:Bsmallmatrix)
+call s:Tex_SpecialMacros('MMX', '&Math.', 'matrix', s:matrix)
+call s:Tex_SpecialMacros('MPM', '&Math.', 'pmatrix', s:pmatrix)
+call s:Tex_SpecialMacros('MBM', '&Math.', 'bmatrix', s:bmatrix)
+call s:Tex_SpecialMacros('MCM', '&Math.', 'Bmatrix', s:Bmatrix)
+call s:Tex_EnvMacros('MAD', '&Math.', 'aligned')
+call s:Tex_EnvMacros('MCA', '&Math.', 'cases')
+call s:Tex_EnvMacros('MDM', '&Math.', 'displaymath')
+call s:Tex_EnvMacros('MES', '&Math.', 'equation*')
+call s:Tex_EnvMacros('MGS', '&Math.', 'gather*')
+call s:Tex_EnvMacros('MMA', '&Math.', 'math')
+call s:Tex_EnvMacros('MMS', '&Math.', 'multline*')
+call s:Tex_EnvMacros('MSE', '&Math.', 'subequations')
+call s:Tex_EnvMacros('MSP', '&Math.', 'split')
+" }}}
+" Theorem {{{
+call s:Tex_SpecialMacros('TTH', '&Theorem', 'theorem', s:theorem)
+call s:Tex_SpecialMacros('TPRP', '&Theorem', 'proposition', s:proposition)
+call s:Tex_SpecialMacros('TLE', '&Theorem', 'lemma', s:lemma)
+call s:Tex_SpecialMacros('TCOR', '&Theorem', 'corollary', s:corollary)
+call s:Tex_SpecialMacros('TCON', '&Theorem', 'conjecture', s:conjecture)
+call s:Tex_SpecialMacros('TDE', '&Theorem', 'definition', s:definition)
+call s:Tex_SpecialMacros('TEXA', '&Theorem', 'example', s:example)
+call s:Tex_SpecialMacros('TEXE', '&Theorem', 'exercise', s:exercise)
+call s:Tex_SpecialMacros('TME', '&Theorem', 'method', s:method)
+call s:Tex_SpecialMacros('TAX', '&Theorem', 'axiom', s:axiom)
+call s:Tex_EnvMacros('TRE', '&Theorem', 'remark')
+call s:Tex_EnvMacros('TQU', '&Theorem', 'question')
+call s:Tex_EnvMacros('TPRF', '&Theorem', 'proof')
+call s:Tex_EnvMacros('TIPRF', '&Theorem', 'ideaofproof')
+" }}}
+" Tikz {{{
+call s:Tex_SpecialMacros('ETZ', '&Tikz', 'tikzpicture', s:tikzpicture)
 " }}}
 " Structure {{{
-call s:Tex_SpecialMacros('EAR', 'Math.', 'array', s:array)
 call s:Tex_EnvMacros('EAB', '&Structure.', 'abstract')
 call s:Tex_EnvMacros('EAP', '&Structure.', 'appendix')
 call s:Tex_EnvMacros('ECE', '&Structure.', 'center')
@@ -270,14 +352,21 @@ call s:Tex_EnvMacros('ESL', '&Structure.', 'slide')
 call s:Tex_SectionMacros('SPA', 'part')
 call s:Tex_SectionMacros('SCH', 'chapter')
 call s:Tex_SectionMacros('SSE', 'section')
+call s:Tex_SectionMacros('SSA', 'section*')
 call s:Tex_SectionMacros('SSS', 'subsection')
 call s:Tex_SectionMacros('SS2', 'subsubsection')
 call s:Tex_SectionMacros('SPG', 'paragraph')
 call s:Tex_SectionMacros('SSP', 'subparagraph')
 " }}}
+" Beamer {{{
+call s:Tex_EnvMacros('BFR', '&Beamer.', 'frame')
+call s:Tex_EnvMacros('BBL', '&Beamer.', 'block')
+" }}}
 " Miscellaneous {{{
 call s:Tex_SpecialMacros('', '', '-sepenv1-', ' :', 0)
 call s:Tex_SpecialMacros('EFI', '', 'figure', "\<C-r>=Tex_PutEnvironment('figure')\<CR>")
+call s:Tex_SpecialMacros('ESF', '', 'subfigure', s:subfigure)
+call s:Tex_SpecialMacros('ECO', '', 'code', s:code)
 call s:Tex_EnvMacros('', '', 'figure*')
 call s:Tex_EnvMacros('ELR', '', 'lrbox')
 call s:Tex_SpecialMacros('EMP', '', 'minipage', s:minipage)
@@ -297,14 +386,14 @@ endif
 "   nnoremap <lhs> i<C-r>=Tex_itemize('enumerate')<CR>
 "
 " and so on...
-" ============================================================================== 
+" ==============================================================================
 " Tex_itemize: {{{
 function! Tex_itemize(env)
 	return IMAP_PutTextWithMovement('\begin{'.a:env."}\<cr>"
 				\ . "\\item" . s:items_with_cr . "<++>\<cr>"
 				\ . "\\end{".a:env."}" . s:end_with_cr . "<++>")
 endfunction
-" }}} 
+" }}}
 " Tex_description: {{{
 function! Tex_description(env)
 	if g:Tex_UseMenuWizard == 1
@@ -317,7 +406,7 @@ function! Tex_description(env)
 		return IMAP_PutTextWithMovement(s:description)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_figure: {{{
 function! Tex_figure(env)
 	if g:Tex_UseMenuWizard == 1
@@ -356,7 +445,7 @@ function! Tex_figure(env)
 		return IMAP_PutTextWithMovement(s:figure)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_table: {{{
 function! Tex_table(env)
 	if g:Tex_UseMenuWizard == 1
@@ -397,7 +486,7 @@ function! Tex_table(env)
 		return IMAP_PutTextWithMovement(s:table)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_tabular: {{{
 function! Tex_tabular(env)
 	if g:Tex_UseMenuWizard == 1
@@ -414,7 +503,7 @@ function! Tex_tabular(env)
 		return IMAP_PutTextWithMovement('\begin{'.a:env.'}[<+position+>]{<+format+>}'."\<cr><++>\<cr>\\end{".a:env.'}' . s:end_with_cr . '<++>')
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_standard_env: Provides a 'standard environment' including a label {{{
 function! Tex_standard_env(env)
 	if g:Tex_UseMenuWizard == 1
@@ -443,7 +532,7 @@ function! Tex_standard_env(env)
 	endif
 	return IMAP_PutTextWithMovement('\begin{'.a:env."}\<cr>".content."\\end{".a:env."}" . s:end_with_cr . "<++>")
 endfunction
-" }}} 
+" }}}
 " Tex_list: {{{
 function! Tex_list(env)
 	if g:Tex_UseMenuWizard == 1
@@ -462,7 +551,7 @@ function! Tex_list(env)
 		return IMAP_PutTextWithMovement(s:list)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_document: {{{
 function! Tex_document(env)
 	if g:Tex_UseMenuWizard == 1
@@ -479,7 +568,7 @@ function! Tex_document(env)
 		return IMAP_PutTextWithMovement(s:document)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_minipage: {{{
 function! Tex_minipage(env)
 	if g:Tex_UseMenuWizard == 1
@@ -496,7 +585,7 @@ function! Tex_minipage(env)
 		return IMAP_PutTextWithMovement(s:minipage)
 	endif
 endfunction
-" }}} 
+" }}}
 " Tex_thebibliography: {{{
 function! Tex_thebibliography(env)
 	if g:Tex_UseMenuWizard == 1
@@ -520,18 +609,18 @@ function! Tex_thebibliography(env)
 			\ "\\end{thebibliography}" . s:end_with_cr . "<++>")
 	endif
 endfunction
-" }}} 
+" }}}
 
 " ==============================================================================
 " Contributions / suggestions from Carl Mueller (auctex.vim)
-" ============================================================================== 
+" ==============================================================================
 " PromptForEnvironment: prompts for an environment {{{
-" Description: 
+" Description:
 function! PromptForEnvironment(ask)
 	return Tex_ChooseFromPrompt(
-		\ a:ask."\n" . 
+		\ a:ask."\n" .
 		\ Tex_CreatePrompt(g:Tex_PromptedEnvironments, 2, ",") .
-		\ "\nEnter name or number of environment :", 
+		\ "\nEnter name or number of environment :",
 		\ g:Tex_PromptedEnvironments, ",")
 endfunction " }}}
 " Tex_DoEnvironment: fast insertion of environments {{{
@@ -563,7 +652,7 @@ function! Tex_DoEnvironment(...)
 	endif
 endfunction " }}}
 " Tex_PutEnvironment: calls various specialized functions {{{
-" Description: 
+" Description:
 "   Based on input argument, it calls various specialized functions.
 function! Tex_PutEnvironment(env)
 	if exists("s:isvisual") && s:isvisual == "yes"
@@ -573,31 +662,26 @@ function! Tex_PutEnvironment(env)
 		endif
 		return VEnclose('\begin{'.a:env.'}', '\end{'.a:env.'}', '\begin{'.a:env.'}', '\end{'.a:env.'}')
 	else
-		" first check if the keyword has been set as an alias
-		let env = a:env
-		if exists("g:Tex_Env_{'".a:env."'}_aliasto")
-			let env = g:Tex_Env_{a:env}_aliasto
-		endif
 		" The user can define something like
 		" let g:Tex_Env_theorem = "\\begin{theorem}\<CR><++>\<CR>\\end{theorem}"
 		" This will effectively over-write the default definition of the
 		" theorem environment which uses a \label.
-		if exists("b:Tex_Env_{'".env."'}")
-			return IMAP_PutTextWithMovement(b:Tex_Env_{env})
-		elseif exists("g:Tex_Env_{'".env."'}")
-			return IMAP_PutTextWithMovement(g:Tex_Env_{env})
-		elseif env =~ '^\%(theorem\|definition\|lemma\|proposition\|corollary\|assumption\|remark\|equation\|align\*\|align\>\|multline\|subequations\)$'
-			return Tex_standard_env(env)
-		elseif env =~ '^\%(enumerate\|itemize\|theindex\|trivlist\)$'
-			return Tex_itemize(env)
-		elseif env =~ '^\%(table\|table*\)$'
-			return Tex_table(env)
-		elseif env =~ '^\%(tabular\|tabular*\|array\|array*\)$'
-			return Tex_tabular(env)
-		elseif env =~# '^\%(description\|figure\|list\|document\|minipage\|thebibliography\)$'
+		if exists("b:Tex_Env_{'".a:env."'}")
+			return IMAP_PutTextWithMovement(b:Tex_Env_{a:env})
+		elseif exists("g:Tex_Env_{'".a:env."'}")
+			return IMAP_PutTextWithMovement(g:Tex_Env_{a:env})
+		elseif a:env =~ '^\%(theorem\|definition\|lemma\|proposition\|corollary\|assumption\|equation\|align\*\|align\>\|multline\|multiline\*\|subequations\)$'
+			return Tex_standard_env(a:env)
+		elseif a:env =~ '^\%(enumerateAlph\|enumeratealph\|enumeratearabic\|enumerateRoman\|enumerateroman\|enumerate\|itemize\|theindex\|trivlist\)$'
+			return Tex_itemize(a:env)
+		elseif a:env =~ '^\%(table\|table*\)$'
+			return Tex_table(a:env)
+		elseif a:env =~ '^\%(tabular\|tabular*\|array\|array*\)$'
+			return Tex_tabular(a:env)
+		elseif a:env =~# '^\%(description\|figure\|list\|document\|minipage\|thebibliography\)$'
 			" Call spezialized functions
-			exe 'return Tex_'.env.'(env)'
-		elseif env == '\['
+			exe 'return Tex_'.a:env.'(a:env)'
+		elseif a:env == '\['
 			return IMAP_PutTextWithMovement("\\[\<CR><++>\<CR>\\]" . s:end_with_cr . "<++>")
 		else
 			" Look in supported packages if exists template for environment
@@ -606,12 +690,14 @@ function! Tex_PutEnvironment(env)
 				let i = 1
 				while Tex_Strntok(g:Tex_package_supported, ',', i) != ''
 					let checkpack = Tex_Strntok(g:Tex_package_supported, ',', i)
-					if g:TeX_package_{checkpack} =~ 'e..:'.env
-						if env =~ '*'
+					if g:TeX_package_{checkpack} =~ 'e..:'.a:env
+						if a:env =~ '*'
 							" Don't allow * to be treated as wildcard
-							let env = substitute(env, '*', '\\*', '')
+							let aenv = substitute(a:env, '*', '\\*', '')
+						else
+							let aenv = a:env
 						endif
-						let envcommand = matchstr(g:TeX_package_{checkpack}, '\zse..:'.env.'[^,]\{-}\ze,')
+						let envcommand = matchstr(g:TeX_package_{checkpack}, '\zse..:'.aenv.'[^,]\{-}\ze,')
 						return Tex_ProcessPackageCommand(envcommand)
 					endif
 					let i = i + 1
@@ -620,7 +706,7 @@ function! Tex_PutEnvironment(env)
 		endif
 		" If nothing before us managed to create an environment, then just
 		" create a bare-bones environment from the name.
-		return IMAP_PutTextWithMovement('\begin{'.env."}\<cr><++>\<cr>\\end{".env."}" . s:end_with_cr . "<++>")
+		return IMAP_PutTextWithMovement('\begin{'.a:env."}\<cr><++>\<cr>\\end{".a:env."}" . s:end_with_cr . "<++>")
 	endif
 endfunction " }}}
 " Mapping the <F5> key to insert/prompt for an environment/package {{{
@@ -700,7 +786,7 @@ if g:Tex_PromptedEnvironments != ''
 			call Tex_SetPos(pos)
 			return Tex_DoEnvironment()
 		endif
-	endfunction 
+	endfunction
 
 	" }}}
 	" Tex_package_from_line: puts a \usepackage line in the current line. " {{{
@@ -708,10 +794,10 @@ if g:Tex_PromptedEnvironments != ''
 	"
 	function! Tex_package_from_line()
 		" Function Tex_PutPackage is defined in packages.vim
-		" Ignores <F5> in Visual mode 
+		" Ignores <F5> in Visual mode
 		if s:isvisual == "yes"
 			return 0
-		else	   
+		else
 			let l = getline(".")
 			let pack = matchstr(l, '^\s*\zs.*')
 			normal!  0"_D
@@ -725,8 +811,8 @@ if g:Tex_PromptedEnvironments != ''
 				return IMAP_PutTextWithMovement('\usepackage{'.pack."}\<CR>", '<+', '+>')
 			endif
 		endif
-	endfunction 
-	
+	endfunction
+
 	" }}}
 	" Tex_ChangeEnvironments: calls Change() to change the environment {{{
 	" Description:
@@ -735,7 +821,7 @@ if g:Tex_PromptedEnvironments != ''
 	"   which need to be made to change one env to another and calls
 	"   Change() with the info.
 	"
-	function! Tex_ChangeEnvironments() 
+	function! Tex_ChangeEnvironments()
 
 
 		let env_name = Tex_GetCurrentEnv()
@@ -755,25 +841,26 @@ if g:Tex_PromptedEnvironments != ''
 		elseif change_env == 'align*'
 			call <SID>Change('align*', 0, '\\nonumber', 0)
 		elseif change_env == 'equation*'
-			call <SID>Change('equation*', 0, '&\|\\lefteqn{\|\\nonumber\|\\\\', 0)
+			call <SID>Change('equation*', 0, '&\|\\lefteqn{\|\\nonumber', 0)
 		elseif change_env == ''
 			return 0
 		else
-			call <SID>Change(change_env, 0, '', '')
+			call <SID>Change(change_env, 2, '', '')
 			return 0
 		endif
 
-	endfunction 
-	
+	endfunction
+
 	" }}}
 	" Change: changes the current env to the new env {{{
-	" Description: 
+	" Description:
 	"   This function needs to know the changes which need to be made while
 	"   going from an old environment to a new one. This info, it gets from
 	"   Tex_ChangeEnvironments
-	" 
+	"
 	"   env : name of the new environment.
 	"   label : if 1, then insert a \label at the end of the environment.
+	"   		if 2, then don't do a damn thing.
 	"           otherwise, delete any \label line found.
 	"   delete : a pattern which is to be deleted from the original environment.
 	"            for example, going to a equation* environment means we need to
@@ -834,6 +921,7 @@ if g:Tex_PromptedEnvironments != ''
 				endif
 				normal! $
 			endif
+		elseif a:label == 2
 		else
 			exe 'silent '.top . ',' . bottom . ' g/\\label/delete'
 		endif
@@ -852,7 +940,7 @@ endif
 if g:Tex_HotKeyMappings != ''
 
 	" SetUpHotKeys: maps <F1> through <F4> to insert environments
-	" Description: 
+	" Description:
 	function! <SID>SetUpHotKeys()
 		let i = 1
 		let envname = Tex_Strntok(g:Tex_HotKeyMappings, ',', i)
@@ -862,7 +950,7 @@ if g:Tex_HotKeyMappings != ''
 
 			let i = i + 1
 			let envname = Tex_Strntok(g:Tex_HotKeyMappings, ',', i)
-			
+
 		endwhile
 
 	endfunction
@@ -888,10 +976,10 @@ endfunction " }}}
 
 " ==============================================================================
 " Contributions / Tex_InsertItem() from Johannes Tanzler
-" ============================================================================== 
+" ==============================================================================
 " Tex_GetCurrentEnv: gets the current environment in which the cursor lies {{{
 " Description: handles cases such as:
-" 	
+"
 " 	\begin{itemize}
 " 		\item first item
 " 		\item second item
@@ -903,9 +991,9 @@ endfunction " }}}
 " 		\item third item
 " 		% Tex_GetCurrentEnv will return "itemize" when called from here
 " 	\end{itemize}
-" 	% Tex_GetCurrentEnv will return "" when called from here 
+" 	% Tex_GetCurrentEnv will return "" when called from here
 "
-" Author: Alan Schmitt
+" Author: Albin Ahlbäck
 function! Tex_GetCurrentEnv()
 	let pos = Tex_GetPos()
 
@@ -937,9 +1025,11 @@ endfunction
 "    Description: Find last \begin line, extract env name, return to the start
 "    			  position and insert proper \item, depending on env name.
 "    			  Env names are stored in g: variables it can be used by
-"    			  package files. 
+"    			  package files.
 
-for env in ['itemize', 'enumerate', 'theindex',
+for env in ['itemize', 'enumerate', 'enumerateAlph', 'enumeratealph',
+			\ 'enumeratearabic', 'enumerateRoman',
+			\ 'enumerateroman', 'theindex',
 			\ 'asparaenum',  'asparaitem',
 			\ 'compactenum', 'compactitem',
 			\ 'inparaenum',  'inparaitem']
@@ -969,7 +1059,7 @@ function! Tex_SetItemMaps()
 	" Only include the <M-i> mapping if the user want this. Note that it
 	" conflicts with inserting 'é'.
 	if !hasmapto("<Plug>Tex_InsertItemOnThisLine", "i") && g:Tex_AdvancedMath == 1
-		imap <buffer> <M-i> <Plug>Tex_InsertItemOnThisLine
+		imap <buffer> <M-i> <Plug>Tex_InsertItemOnNextLine
 	endif
 	if !hasmapto("<Plug>Tex_InsertItemOnNextLine", "i")
 		imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
@@ -977,7 +1067,7 @@ function! Tex_SetItemMaps()
 endfunction " }}}
 
 " ==============================================================================
-" Implementation of Fast Environment commands for LaTeX commands 
+" Implementation of Fast Environment commands for LaTeX commands
 " ==============================================================================
 " Define certain commonly used command definitions {{{
 
@@ -987,9 +1077,9 @@ TexLet g:Tex_Com_{'tfrac'} = '\tfrac{<+n+>}{<+d+>}<++>'
 
 " }}}
 " PromptForCommand: prompts for a command {{{
-" Description: 
+" Description:
 function! PromptForCommand(ask)
-	let common_com_prompt = 
+	let common_com_prompt =
 				\ Tex_CreatePrompt(g:Tex_PromptedCommands, 2, ',') . "\n" .
 				\ "Enter number or command name :"
 
@@ -1044,7 +1134,7 @@ function! Tex_DoCommand(isvisual)
 	endif
 endfunction " }}}
 " Tex_PutCommand: calls various specialized functions {{{
-" Description: 
+" Description:
 "   Based on input argument, it calls various specialized functions.
 function! Tex_PutCommand(com, isvisual)
 	if a:isvisual == "yes"
@@ -1056,18 +1146,14 @@ function! Tex_PutCommand(com, isvisual)
 			return VEnclose("\\".a:com.'{', '}', "\\".a:com.'{', '}')
 		endif
 	else
-		let com = a:com
-		if exists('g:Tex_Com_{"'.a:com.'"}_aliasto')
-			let com = g:Tex_Com_{a:com}_aliasto
-		endif
-		if exists('b:Tex_Com_{"'.com.'"}')
-			return IMAP_PutTextWithMovement(b:Tex_Com_{com})
-		elseif exists('g:Tex_Com_{"'.com.'"}')
-			return IMAP_PutTextWithMovement(g:Tex_Com_{com})
-		elseif com == '$'
+		if exists('b:Tex_Com_{"'.a:com.'"}')
+			return IMAP_PutTextWithMovement(b:Tex_Com_{a:com})
+		elseif exists('g:Tex_Com_{"'.a:com.'"}')
+			return IMAP_PutTextWithMovement(g:Tex_Com_{a:com})
+		elseif a:com == '$'
 			return IMAP_PutTextWithMovement('$<++>$')
 		else
-			return IMAP_PutTextWithMovement("\\".com.'{<++>}<++>')
+			return IMAP_PutTextWithMovement("\\".a:com.'{<++>}<++>')
 		endif
 	endif
 endfunction " }}}
@@ -1075,7 +1161,7 @@ endfunction " }}}
 " and <S-F7> to prompt/replace command
 "
 " g:Tex_PromptedCommands is a variable containing a comma seperated list
-" of commands. 
+" of commands.
 "
 " Leaving this empty is equivalent to disabling the feature.
 if g:Tex_PromptedCommands != ''
@@ -1094,7 +1180,7 @@ if g:Tex_PromptedCommands != ''
 	"   which need to be made to change one env to another and calls
 	"   ChangeCommand() with the info.
 	"
-	function! Tex_ChangeCommand(isvisual) 
+	function! Tex_ChangeCommand(isvisual)
 
 		let pos_com = Tex_GetPos()
 
@@ -1104,7 +1190,7 @@ if g:Tex_PromptedCommands != ''
 			normal! l
 			let com_name = expand('<cword>')
 		endif
-		
+
 		if !exists('com_name')
 			echomsg "You are not inside command"
 			call Tex_SetPos(pos_com)
@@ -1123,7 +1209,7 @@ if g:Tex_PromptedCommands != ''
 			return 0
 		endif
 
-	endfunction 
+	endfunction
 
 	" }}}
 	" ChangeCommand: Changes current command according to prompt menu {{{
@@ -1132,7 +1218,7 @@ if g:Tex_PromptedCommands != ''
 	function! s:ChangeCommand(newcom)
 
 		exe 'normal! ct{'.a:newcom."\<Esc>"
-		
+
 	endfunction
 	" }}}
 
@@ -1163,7 +1249,7 @@ function! Tex_SetFastCommandMaps()
 endfunction " }}}
 
 " SetEnvMacrosOptions: sets mappings for buffers {{{
-" " Description: 
+" " Description:
 function! <SID>SetEnvMacrosOptions()
 	if exists('b:doneTexEnvMaps')
 		return
@@ -1179,7 +1265,7 @@ function! <SID>SetEnvMacrosOptions()
 endfunction " }}}
 " Catch the Filetype event so we set maps for each buffer {{{
 augroup LatexSuite
-	au LatexSuite User LatexSuiteFileType 
+	au LatexSuite User LatexSuiteFileType
 		\ call Tex_Debug('envmacros.vim: Catching LatexSuiteFileType event', 'env') |
 		\ call s:SetEnvMacrosOptions()
 augroup END
