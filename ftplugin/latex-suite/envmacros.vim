@@ -83,7 +83,7 @@ let s:Bmatrix =		"\\begin{Bmatrix}\<cr><++>\<cr>\\end{Bmatrix}<++>"
 
 let s:definition =	"\\begin{definition}\<cr>\\label{" . s:labelprefix_definition . "<+label+>}\<cr><++>\<cr>\\end{definition}" . s:end_with_cr . "<++>"
 let s:theorem =		"\\begin{theorem}\<cr>\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{theorem}" . s:end_with_cr . "<++>"
-let s:proposition =	"\\begin{proposition}\<cr>\\label{" . s:labelprefix_theorem . "<+label+>}\<cr><++>\<cr>\\end{proposition}" . s:end_with_cr . "<++>"
+let s:proposition =	"\\begin{proposition}\<cr>\\label{" . s:labelprefix_proposition . "<+label+>}\<cr><++>\<cr>\\end{proposition}" . s:end_with_cr . "<++>"
 let s:lemma =		"\\begin{lemma}\<cr>\\label{" . s:labelprefix_lemma . "<+label+>}\<cr><++>\<cr>\\end{lemma}" . s:end_with_cr . "<++>"
 let s:corollary =	"\\begin{corollary}\<cr>\\label{" . s:labelprefix_corollary . "<+label+>}\<cr><++>\<cr>\\end{corollary}" . s:end_with_cr . "<++>"
 let s:conjecture =	"\\begin{conjecture}\<cr>\\label{" . s:labelprefix_conjecture . "<+label+>}\<cr><++>\<cr>\\end{conjecture}" . s:end_with_cr . "<++>"
