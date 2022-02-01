@@ -96,6 +96,7 @@ if !exists('s:doneMappings')
 	call IMAP ('__', '_{<++>}<++>', "tex")
 	call IMAP ('^^', '^{<++>}<++>', "tex")
 	call IMAP ('{}', '{<++>}<++>', "tex")
+	call IMAP ('þþ', '{<++>}<++>', "tex")
 	call IMAP ('{{', '{<++>}<++>', "tex")
 	" }}}
 	" aligned environments {{{
