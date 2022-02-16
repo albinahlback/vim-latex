@@ -176,7 +176,10 @@ if !exists('s:doneMappings')
 	if !g:Tex_SmartKeyDot
 		call IMAP (g:Tex_Leader.'.', '\cdot', "tex")
 	end
+	call IMAP (g:Tex_Leader2.'ra', '\rightarrow', "tex")
+	call IMAP (g:Tex_Leader2.'mt', '\mapsto', "tex")
 	call IMAP (g:Tex_Leader2.'lra', '\longrightarrow', "tex")
+	call IMAP (g:Tex_Leader2.'lmt', '\longmapsto', "tex")
 	call IMAP (g:Tex_Leader2.'fa', '\forall', "tex")
 	call IMAP (g:Tex_Leader2.'ex', '\exists', "tex")
 	" }}}
