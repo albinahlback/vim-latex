@@ -319,7 +319,6 @@ function! MakeTexFolds(force, manual)
 			\ '^\s*\\\%(frontmatter\|mainmatter\|backmatter\)\|'
 			\. '^\s*\\begin{thebibliography\|^\s*\\endinput\|'
 			\. '^\s*\\begin{slide\|^\s*\\\%(begin\|end\){document\|'
-			\. '^\s*\\printbibliography\|'
 			\. '^\s*\\\%(\%(begin\|end\){appendix}\|appendix\)')
 	endif
 	" }}}
