@@ -93,7 +93,7 @@ if !exists('g:tex_items')
 	let g:tex_items = '\\bibitem\>\|\\item\>'
 endif
 if !exists("g:tex_itemize_env")
-	let g:tex_itemize_env = 'itemize\|description\|enumerateAlph\|enumeratealph\|enumeratearabic\|enumerateRoman\|enumerateroman\|enumerate\|thebibliography'
+	let g:tex_itemize_env = 'itemize\|description\|enumerate'
 endif
 if !exists("g:tex_noindent_env")
 	let g:tex_noindent_env = 'document\|verbatim\|comment\|lstlisting\|frame'
