@@ -93,6 +93,7 @@ if !exists('s:doneMappings')
 	" }}}
 	" enclosings {{{
 	call IMAP ('$$', '$<++>$<++>', "tex")
+	call IMAP ('~~', '~$<++>$<++>', "tex")
 	call IMAP ('__', '_{<++>}<++>', "tex")
 	call IMAP ('^^', '^{<++>}<++>', "tex")
 	call IMAP ('{}', '{<++>}<++>', "tex")
@@ -100,12 +101,13 @@ if !exists('s:doneMappings')
 	call IMAP ('{{', '{<++>}<++>', "tex")
 	" }}}
 	" aligned environments {{{
-	call IMAP ('==', '&= ', "tex")
-	call IMAP ('~~', '&\approx ', "tex")
+	" call IMAP ('==', '&= ', "tex")
+	" call IMAP ('~~', '&\approx ', "tex")
 	" }}}
 	" binary relations or operations {{{
-	call IMAP ('=~', '\approx', "tex")
-	call IMAP ('~=', '\approx', "tex")
+	" call IMAP ('=~', '\approx', "tex")
+	" call IMAP ('~=', '\approx', "tex")
+	call IMAP ('==', '\;=\;', "tex")
 	call IMAP (g:Tex_Leader.'<', '\le', "tex")
 	call IMAP (g:Tex_Leader.'>', '\ge', "tex")
 	call IMAP (g:Tex_Leader.'*', '\times', "tex")
@@ -155,8 +157,8 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader.'~', '\tilde{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.';', '\dot{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.':', '\ddot{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'^', '\widehat{<++>}<++>', "tex")
-	call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
+	" call IMAP (g:Tex_Leader2.'^', '\widehat{<++>}<++>', "tex")
+	" call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ol', '\overline{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ul', '\underline{<++>}<++>', "tex")
 	" }}}
