@@ -196,6 +196,7 @@ if !exists('s:doneMappings')
 	" }}}
 	" misc {{{
 	call IMAP (g:Tex_Leader.',', '\nonumber', "tex")
+	call IMAP (g:Tex_Leader2.'t', '\tx{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ig', '\includegraphics[<+dimensions+>]{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'SI', '\SI{<++>}{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'fn', '\footnote{<++>}<++>', "tex")
