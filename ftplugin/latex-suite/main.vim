@@ -97,7 +97,9 @@ if !exists('s:doneMappings')
 	call IMAP ('__', '_{<++>}<++>', "tex")
 	call IMAP ('^^', '^{<++>}<++>', "tex")
 	call IMAP ('{}', '{<++>}<++>', "tex")
+	call IMAP ('ππ', '{<++>}<++>', "tex")
 	call IMAP ('þþ', '{<++>}<++>', "tex")
+	call IMAP ('øø', "{\<CR><++>\<CR>}", "tex")
 	call IMAP ('{{', '{<++>}<++>', "tex")
 	" }}}
 	" aligned environments {{{
@@ -159,7 +161,7 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader.';', '\dot{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader.':', '\ddot{<++>}<++>', "tex")
 	" call IMAP (g:Tex_Leader2.'^', '\widehat{<++>}<++>', "tex")
-	" call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'~', '\widetilde{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ol', '\overline{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ul', '\underline{<++>}<++>', "tex")
 	" }}}
