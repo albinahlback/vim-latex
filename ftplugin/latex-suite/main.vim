@@ -145,6 +145,7 @@ if !exists('s:doneMappings')
 	call IMAP (g:Tex_Leader2.'sf', '\mathsf{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'ds', '\mathds{<++>}<++>', "tex")
 	call IMAP (g:Tex_Leader2.'fr', '\mathfrak{<++>}<++>', "tex")
+	call IMAP (g:Tex_Leader2.'mc', '\mathcal{<++>}<++>', "tex")
 
 	call IMAP (g:Tex_Leader2.'ts', '{\textstyle <++>}<++>', "tex")
 	" }}}
