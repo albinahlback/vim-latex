@@ -1055,14 +1055,28 @@ endfunction
 inoremap <script> <silent> <Plug>Tex_InsertItemOnThisLine <C-r>=Tex_InsertItem()<CR>
 inoremap <script> <silent> <Plug>Tex_InsertItemOnNextLine <ESC>o<C-R>=Tex_InsertItem()<CR>
 
+if !exists('g:Tex_Env')
+	if has('win64') || has('win32') || has('win16')
+		let g:Tex_Env = 'Windows'
+	else
+		let g:Tex_Env = substitute(system('uname'), '\n', '', '')
+	endif
+endif
+
 function! Tex_SetItemMaps()
 	" Only include the <M-i> mapping if the user want this. Note that it
 	" conflicts with inserting 'é'.
-	if !hasmapto("<Plug>Tex_InsertItemOnThisLine", "i") && g:Tex_AdvancedMath == 1
-		imap <buffer> <M-i> <Plug>Tex_InsertItemOnNextLine
-	endif
-	if !hasmapto("<Plug>Tex_InsertItemOnNextLine", "i")
-		imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
+	if g:Tex_Env == 'Darwin'
+		if !hasmapto("<Plug>Tex_InsertItemOnThisLine", "i") && g:Tex_AdvancedMath == 1
+			imap <buffer> <C-i> <Plug>Tex_InsertItemOnNextLine
+		endif
+	else
+		if !hasmapto("<Plug>Tex_InsertItemOnThisLine", "i") && g:Tex_AdvancedMath == 1
+			imap <buffer> <M-i> <Plug>Tex_InsertItemOnNextLine
+		endif
+		if !hasmapto("<Plug>Tex_InsertItemOnNextLine", "i")
+			imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
+		endif
 	endif
 endfunction " }}}
 
